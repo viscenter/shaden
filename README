@@ -1,0 +1,42 @@
+SHADEN - The Sophisticated Handling of Artifacts Digitally Enhanced by Nrrd's
+Shaden Smith - Summer 2010
+
+Installation:
+	The installation of ITK and OpenCV are required. SHADEN will not build
+	without these. After installation cd to SHADEN's directory and:
+		cmake .
+		make
+	to build.
+
+SHADEN uses the default build of the ITK toolkit for image manipulation. See 
+included example programs for more information. ITK has a free, downloadable 
+PDF that offers *great*	documentation. I would highly recommend reading the 
+first portion of that for an introduction to ITK.
+
+Suggestion:
+Ryan's code makes use of the OpenCV library for grabbing rays out of an image. 
+I never got around to learning much about OpenCV (and therefore haven't 
+included any documentation on it) but would	highly recommend you include OpenCV
+in SHADEN for free ray sampling and easier porting. The majority of Ryan's code
+that used OpenCV has been ported exactly and the makefile (set up via cmake) 
+has been configured to include OpenCV during compile time. Read the CmakeLists
+file for details.
+
+TODO:
+- Finish porting Ryan's code, found in ScrollUnwrapMultiPlugin.cc. I've 
+  included the source file to work from. 
+- Determine effectiveness of Ryan's algorithm and adjust/rewrite as needed.
+- When you realize that it won't work for this data set, come up with something 
+  new. A few discussed ideas are:
+	=	Use the curve of intensity level and calculate the second derivative. These
+		peaks/troughs could possibly represent the edges of pages that are pressed 
+		together. Use ITK to calculuate the second derivative, it has a class built-
+		in for just this purpose. See the included PDF (or more recent version) for 
+		more details on how to use it.
+	=	The previous idea would (possibly) work for pressed pages, but it will not
+		work for pages that are curled over themselves (think hyperbola). An idea 
+		that could also be considered is starting at the outermost layer, calculate
+		the normal vector and use that to guide the unwrapping in a clockwise motion
+		around the scroll.
+	= 	Talk to Matt or Ryan for more information on these.
+- Unwrap the scrolls and find the key.

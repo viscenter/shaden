@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 2.8)
+
+PROJECT(shaden)
+
+# Find ITK.
+FIND_PACKAGE(ITK REQUIRED)
+INCLUDE(${ITK_USE_FILE})
+
+# Find OpenCV
+FIND_PACKAGE(OpenCV REQUIRED)
+
+ADD_EXECUTABLE(shaden shaden.cxx )
+
+TARGET_LINK_LIBRARIES(shaden ITKCommon ITKIO ${OpenCV_LIBS})
